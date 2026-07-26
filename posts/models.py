@@ -23,6 +23,8 @@ class Pet(models.Model):
         ('lost','Lost'),
         ('stray','Stray'),
         ('fostered','Fostered'),
+        ('reunited','Reunited'),
+        ('adopted','Adopted'),
     ]
     status=models.CharField(max_length=100, choices= STATUS_CHOICES)
     COLOR_CHOICES = [
@@ -33,6 +35,13 @@ class Pet(models.Model):
         ('other', 'Other'),
     ]
     color=models.CharField(max_length=100, choices=COLOR_CHOICES)
+    SEX_CHOICES=[
+        ('male','Male'),
+        ('female','Female'),
+        ('unknown','Unknown'),
+    ]
+    sex=models.CharField(max_length=100, choices=SEX_CHOICES,default='unknown')
     def __str__(self):
         return self.name
-    
+
+    embedding=models.JSONField(null=True,blank=True)

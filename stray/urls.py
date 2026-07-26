@@ -15,19 +15,15 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path,include
 from rest_framework.authtoken.views import obtain_auth_token
 from django.conf import settings
 from django.conf.urls.static import static
-from posts.views import ClaimPetView, MyPetView, PetListView, PetDetailView,SignUpView,index
-
+from posts.views import ClaimPetView, MyPetView, PetListView, PetDetailView,index
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('api/auth/token/',obtain_auth_token),
-    path('',index),
-    path('pets/',PetListView.as_view()),
-    path('pets/my-pets/',MyPetView.as_view()),
-    path('pets/<int:pk>/',PetDetailView.as_view()),
-    path('pets/<int:pk>/claim/',ClaimPetView.as_view()),
-    path('signup/',SignUpView.as_view()),
+    
+    path('api/posts/',include("posts.urls")),
+    path('api/accounts/',include("accounts.urls")),
+    path('api-auth/', include('rest_framework.urls')),
+
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

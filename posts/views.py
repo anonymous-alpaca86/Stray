@@ -4,7 +4,8 @@ from django.shortcuts import render
 from rest_framework import generics, status, filters
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .serializers import PetSerializer, UserSerializer
+from .serializers import PetSerializer
+from accounts.serializers import UserSerializer
 from .models import Pet,User
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.parsers import MultiPartParser, FormParser
@@ -12,6 +13,10 @@ from django.shortcuts import get_object_or_404
 from rest_framework.exceptions import NotFound, PermissionDenied
 from rest_framework.permissions import BasePermission
 from django.http import JsonResponse
+from django_filters.rest_framework import DjangoFilterBackend
+from PIL import Image
+from .cat_model import load_model, get_embedding
+cat_model = load_model()  
 class IsOwnerOrReadOnly(BasePermission):
     def has_object_permission(self, request, view, obj):
         if request.method in ['GET','HEAD','OPTIONS']:
@@ -33,8 +38,11 @@ class PetListView(generics.ListCreateAPIView):
     ordering_fields = ['created_at', 'species']
     ordering = ['-created_at'] 
     def perform_create(self, serializer):
-        serializer.save(posted_by=self.request.user)
-  
+        pet=serializer.save(posted_by=self.request.user)
+        image = Image.open(pet.image.path).convert('RGB')
+        embedding = get_embedding(cat_model, image)
+        pet.embedding = embedding.tolist()
+        pet.save()
 class PetDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset=Pet.objects.all()
     serializer_class=PetSerializer
@@ -55,9 +63,7 @@ class MyPetView(generics.ListAPIView):
     def get_queryset(self):
         return Pet.objects.filter(posted_by=self.request.user)
 
-class SignUpView(generics.CreateAPIView):
-    queryset=User.objects.all()
-    serializer_class=UserSerializer
+
 
 def index(request):
     return JsonResponse({
