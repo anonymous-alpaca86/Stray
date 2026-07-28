@@ -25,6 +25,7 @@ class Pet(models.Model):
         ('fostered','Fostered'),
         ('reunited','Reunited'),
         ('adopted','Adopted'),
+        ('claimed', 'Claimed'),
     ]
     status=models.CharField(max_length=100, choices= STATUS_CHOICES)
     COLOR_CHOICES = [
@@ -43,5 +44,5 @@ class Pet(models.Model):
     sex=models.CharField(max_length=100, choices=SEX_CHOICES,default='unknown')
     def __str__(self):
         return self.name
-
+    location=models.CharField(max_length=200,default="unknown",null=True,blank=True)
     embedding=models.JSONField(null=True,blank=True)

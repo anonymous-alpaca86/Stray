@@ -6,7 +6,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializers import PetSerializer
 from accounts.serializers import UserSerializer
-from .models import Pet,User
+from .models import Pet
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.parsers import MultiPartParser, FormParser
 from django.shortcuts import get_object_or_404
@@ -15,7 +15,7 @@ from rest_framework.permissions import BasePermission
 from django.http import JsonResponse
 from django_filters.rest_framework import DjangoFilterBackend
 from PIL import Image
-from .cat_model import load_model, get_embedding
+from matching.ml.cat_model import load_model, get_embedding
 cat_model = load_model()  
 class IsOwnerOrReadOnly(BasePermission):
     def has_object_permission(self, request, view, obj):

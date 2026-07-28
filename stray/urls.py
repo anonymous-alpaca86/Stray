@@ -21,9 +21,10 @@ from django.conf import settings
 from django.conf.urls.static import static
 from posts.views import ClaimPetView, MyPetView, PetListView, PetDetailView,index
 urlpatterns = [
-    
+    path('admin/', admin.site.urls),
     path('api/posts/',include("posts.urls")),
     path('api/accounts/',include("accounts.urls")),
     path('api-auth/', include('rest_framework.urls')),
+    path('api/matching/',include("matching.urls")),
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
