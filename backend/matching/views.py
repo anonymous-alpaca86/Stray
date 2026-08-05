@@ -7,7 +7,7 @@ from rest_framework.parsers import MultiPartParser
 from PIL import Image
 import numpy as np
 
-from backend.posts.models import Pet
+from posts.models import Pet
 from .ml.cat_model import load_model, get_embedding
 
 cat_model=load_model()

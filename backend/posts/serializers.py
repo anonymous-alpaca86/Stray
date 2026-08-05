@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import Pet,User
-from backend.accounts.serializers import UserProfileSerializer
+from accounts.serializers import UserProfileSerializer
 
 
 class PetSerializer(serializers.ModelSerializer):

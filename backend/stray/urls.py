@@ -19,7 +19,7 @@ from django.urls import path,include
 from rest_framework.authtoken.views import obtain_auth_token
 from django.conf import settings
 from django.conf.urls.static import static
-from backend.posts.views import ClaimPetView, MyPetView, PetListView, PetDetailView,index
+from posts.views import ClaimPetView, MyPetView, PetListView, PetDetailView,index
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/posts/',include("posts.urls")),

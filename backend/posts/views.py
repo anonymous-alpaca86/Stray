@@ -5,7 +5,7 @@ from rest_framework import generics, status, filters
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializers import PetSerializer
-from backend.accounts.serializers import UserSerializer
+from accounts.serializers import UserSerializer
 from .models import Pet
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.parsers import MultiPartParser, FormParser
@@ -15,7 +15,7 @@ from rest_framework.permissions import BasePermission
 from django.http import JsonResponse
 from django_filters.rest_framework import DjangoFilterBackend
 from PIL import Image
-from backend.matching.ml.cat_model import load_model, get_embedding
+from matching.ml.cat_model import load_model, get_embedding
 cat_model = load_model()  
 class IsOwnerOrReadOnly(BasePermission):
     def has_object_permission(self, request, view, obj):
@@ -34,7 +34,7 @@ class PetListView(generics.ListCreateAPIView):
     pagination_class = PetPagination
     parser_classes = [MultiPartParser, FormParser]
     filter_backends = [filters.SearchFilter, filters.OrderingFilter]
-    search_fields = ['description', 'location', 'color']
+    search_fields = ['name','description', 'location', 'color']
     ordering_fields = ['created_at', 'species']
     ordering = ['-created_at'] 
     def perform_create(self, serializer):
