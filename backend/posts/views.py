@@ -34,7 +34,7 @@ class PetListView(generics.ListCreateAPIView):
     pagination_class = PetPagination
     parser_classes = [MultiPartParser, FormParser]
     filter_backends = [filters.SearchFilter, filters.OrderingFilter]
-    search_fields = ['name','description', 'location', 'color']
+    search_fields = ['name','message', 'location', 'color']
     ordering_fields = ['created_at', 'species']
     ordering = ['-created_at'] 
     def perform_create(self, serializer):

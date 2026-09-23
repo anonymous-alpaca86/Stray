@@ -3,9 +3,11 @@ import PetCard from "../components/PetCard";
 import Footer from "../components/Footer";
 import SearchBar from "../components/SearchBar";
 import {useState, useEffect} from "react";
-function Home(){
-    
-    
+import Profile from "./Profile.jsx"
+import Upload from "./Upload.jsx"
+import {useNavigate} from "react-router-dom";
+export default function Home(){
+    const navigate=useNavigate();
     const [pets, setPets] = useState([]);
     const [search, setSearch] = useState("");
     useEffect(() => {
@@ -22,13 +24,12 @@ function Home(){
             console.error("Fetch error:", error);
         });
 }, [search]);
-
-   
     return (
         <>
             <NavBar />
-
-
+            <button  type="button" onClick={()=>navigate("/profile")}>
+                My Profile
+            </button>
             <SearchBar 
                 search={search}
                 setSearch={setSearch}
@@ -41,9 +42,13 @@ function Home(){
                     location={pet.location}
                 />
             ))}
+            <button type="button" onClick={()=>navigate("/upload")}>
+                Upload a new pet
+            </button>
+            
+
             <Footer />
         </>
     );
 }
 
-export default Home;

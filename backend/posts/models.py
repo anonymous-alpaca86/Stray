@@ -15,7 +15,7 @@ class Pet(models.Model):
     ]
     species=models.CharField(max_length=100, choices=SPECIES_CHOICES)
     name=models.CharField(max_length=100)
-    description=models.TextField(blank=True)
+    message=models.TextField(blank=True)
     image=models.ImageField(upload_to='pets/', blank=True, null=True)
     posted_by=models.ForeignKey(User, on_delete=models.CASCADE)
     created_at=models.DateTimeField(auto_now_add=True)

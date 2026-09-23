@@ -14,8 +14,8 @@ class PetSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("Color description too short")
         return value
     def validate(self,data):
-        if data['status']=='lost' and not data.get('description'):
-            raise serializers.ValidationError("Lost pet need a description")
+        if data['status']=='lost' and not data.get('message'):
+            raise serializers.ValidationError("Lost pet need a message")
         return data
 
 
