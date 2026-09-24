@@ -1,8 +1,10 @@
 
 
 import {useState} from 'react';
+import {useNavigate} from "react-router-dom";
 
 export default function Login(){
+    const navigate=useNavigate();
     const [username,setUsername]=useState("");
     const [password,setPassword]=useState("");
     
@@ -38,6 +40,7 @@ export default function Login(){
     };
 
 return (
+<div>
     <form onSubmit={handleLogin}>
         <input
             type="text"
@@ -54,6 +57,10 @@ return (
         <button type="submit">Login</button>
 
     </form>
+    <button type="button" onClick={()=>navigate("/signup")} >
+        Click to sign up
+    </button>
+</div>
 );
     
 }

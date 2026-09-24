@@ -1,7 +1,5 @@
 import NavBar from "../components/NavBar";
-import PetCard from "../components/PetCard";
 import Footer from "../components/Footer";
-import SearchBar from "../components/SearchBar";
 import {useState, useEffect} from "react";
 
 export default function Profile(){
@@ -35,8 +33,10 @@ export default function Profile(){
     <>
         <NavBar />
             <div>
-                <h1>{profile.username}</h1>
+                <h1>Username: {profile.username}</h1>
                 <p>Email: {profile.email}</p>
+                <p>Location: {profile.location}</p>
+                <p>Phone number: {profile.phone_number}</p>
             </div>
 
         <Footer />
