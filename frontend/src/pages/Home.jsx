@@ -3,8 +3,7 @@ import PetCard from "../components/PetCard";
 import Footer from "../components/Footer";
 import SearchBar from "../components/SearchBar";
 import {useState, useEffect} from "react";
-import Profile from "./Profile.jsx";
-import Upload from "./Upload.jsx";
+
 import {useNavigate} from "react-router-dom";
 export default function Home(){
     const navigate=useNavigate();
@@ -38,6 +37,7 @@ export default function Home(){
             {pets.map((pet) => (
                 <PetCard
                     key={pet.id}
+                    id={pet.id}
                     name={pet.name}
                     location={pet.location}
                     image={pet.image}

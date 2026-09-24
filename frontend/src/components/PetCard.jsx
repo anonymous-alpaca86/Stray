@@ -1,7 +1,11 @@
-function PetCard({name,location,image}){
+import {Link} from "react-router-dom";
+
+function PetCard({id,name,location,image}){
     return (
         <div>
-            <h2>{name}</h2>
+            <h2>
+                <Link to={`/pets/${id}`}>{name}</Link>
+            </h2>
             <p>{location}</p>
             {image && (
             <img 
