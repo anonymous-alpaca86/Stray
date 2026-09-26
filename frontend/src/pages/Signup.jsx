@@ -6,6 +6,7 @@ export default function Signup(){
     const [first_name, setFirst_name] = useState("");
     const [last_name, setLast_name] = useState("");
 
+    //Problem: can sign up new user but cant log in using that account
     const handleSignup=(event)=>{
         event.preventDefault();
         fetch("http://127.0.0.1:8000/api/accounts/signup/", {

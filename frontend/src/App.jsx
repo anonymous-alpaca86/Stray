@@ -22,7 +22,7 @@ function App() {
                 <Route path="/upload" element={<Upload />}/>
                 <Route path="/signup" element={<Signup />}/>
                 <Route path="/pets/:id" element={<PetDetails />}/>
-
+                
 
 
             </Routes>

@@ -3,7 +3,7 @@ import PetCard from "../components/PetCard";
 import Footer from "../components/Footer";
 import SearchBar from "../components/SearchBar";
 import {useState, useEffect} from "react";
-
+import Logout from "../components/Logout";
 import {useNavigate} from "react-router-dom";
 export default function Home(){
     const navigate=useNavigate();
@@ -29,6 +29,7 @@ export default function Home(){
             <button  type="button" onClick={()=>navigate("/profile")}>
                 My Profile
             </button>
+            <Logout/>
             <SearchBar 
                 search={search}
                 setSearch={setSearch}
