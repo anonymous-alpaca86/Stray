@@ -1,5 +1,7 @@
 import {useState, useEffect} from "react";
 import {useParams} from "react-router-dom"
+import {Link} from "react-router-dom";
+
 
 export default function PetDetails(){
     const [error, setError] = useState("");
@@ -37,6 +39,9 @@ if(pet===null){
             <p>Species: {pet.species}</p>
             <p>Message: {pet.message}</p>
             <p>Sex: {pet.sex}</p>
+            <Link to={`/user/${pet.posted_by.id}`}>
+                Posted by: {pet.posted_by.username}
+            </Link>
 
 
         </>

@@ -9,7 +9,7 @@ export default function Upload(){
     const [name, setName] = useState("")
     const [species, setSpecies] = useState("cat")
     const [status, setStatus] = useState("lost")
-    const [color, setColor]= useState("")
+    const [color, setColor]= useState("other")
     const [sex, setSex] = useState("unknown")
     const [location, setLocation] = useState("")
     const handleSubmit=(event)=>{
@@ -62,6 +62,7 @@ export default function Upload(){
                 <select
                     value={status}
                     onChange={(event)=>setStatus(event.target.value)}
+                    required
                 >
                     <option value="lost">Lost</option>
                     <option value="stray">Stray</option>
@@ -69,6 +70,7 @@ export default function Upload(){
                     <option value="reunited">reunited</option>
                     <option value="adopted">Adopted</option>
                     <option value="Claimed">Claimed</option>
+                    
                 </select>
                 <label>
                     Pet Picture:

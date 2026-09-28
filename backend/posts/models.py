@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from django.conf import settings
 # Create your models here.
 
 
@@ -13,11 +13,11 @@ class Pet(models.Model):
         ('dog','Dog'),
         ('other','Other'),
     ]
-    species=models.CharField(max_length=100, choices=SPECIES_CHOICES)
-    name=models.CharField(max_length=100)
+    species=models.CharField(max_length=100, choices=SPECIES_CHOICES,blank=True)
+    name=models.CharField(max_length=100, blank=True)
     message=models.TextField(blank=True)
-    image=models.ImageField(upload_to='pets/', blank=True, null=True)
-    posted_by=models.ForeignKey(User, on_delete=models.CASCADE)
+    image=models.ImageField(upload_to='pets/', null=True)
+    posted_by=models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
     created_at=models.DateTimeField(auto_now_add=True)
     STATUS_CHOICES =[
         ('lost','Lost'),
@@ -35,7 +35,7 @@ class Pet(models.Model):
         ('grey', 'Grey'),
         ('other', 'Other'),
     ]
-    color=models.CharField(max_length=100, choices=COLOR_CHOICES)
+    color=models.CharField(max_length=100, choices=COLOR_CHOICES, blank=True)
     SEX_CHOICES=[
         ('male','Male'),
         ('female','Female'),

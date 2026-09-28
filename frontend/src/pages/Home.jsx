@@ -11,9 +11,12 @@ export default function Home(){
     const [search, setSearch] = useState("");
     useEffect(() => {
     fetch(`http://127.0.0.1:8000/api/posts/pets/?search=${search}`)
-        .then((response) => {
-            console.log("Status:", response.status);
-            return response.json();
+        
+        .then((response)=>{
+            if (!response.ok){
+                throw new Error(`Could not load pet:${response.status}`);
+            }
+            return response.json()
         })
         .then((data) => {
             console.log("Data:", data);

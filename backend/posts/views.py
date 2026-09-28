@@ -16,6 +16,8 @@ from django.http import JsonResponse
 from django_filters.rest_framework import DjangoFilterBackend
 from PIL import Image
 from matching.ml.cat_model import load_model, get_embedding
+from .serializers import PetSerializer
+from rest_framework.permissions import AllowAny
 cat_model = load_model()  
 class IsOwnerOrReadOnly(BasePermission):
     def has_object_permission(self, request, view, obj):
@@ -70,3 +72,9 @@ def index(request):
         "message":"Welcome to the Stray API",
         "version":"1.0",
     })
+class UserPetsView(generics.ListAPIView):
+    serializer_class=PetSerializer
+    permission_classes=[AllowAny]
+    def get_queryset(self):
+        return Pet.objects.filter(posted_by=self.kwargs["user_id"])
+    
