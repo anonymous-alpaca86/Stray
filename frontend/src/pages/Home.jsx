@@ -6,10 +6,33 @@ import {useState, useEffect} from "react";
 import Logout from "../components/Logout";
 import {useNavigate} from "react-router-dom";
 import DeletePost from "../components/DeletePost";
+import PostChange from "./PostChange";
 export default function Home(){
     const navigate=useNavigate();
     const [pets, setPets] = useState([]);
     const [search, setSearch] = useState("");
+    const[currentUser, setCurrenUser]=useState("");
+    const token=localStorage.getItem("token");
+
+    useEffect(()=>{
+        fetch("http://127.0.0.1:8000/api/accounts/profile/",{
+            headers:{
+                "Authorization":`Token ${token}`
+            }
+        })
+        .then((response)=>{
+            if (!response.ok){
+                throw new Error("Cannot load profile")
+            }
+            return response.json()
+        })
+        .then((data)=>{
+            setCurrenUser(data)
+        })
+        .catch((error)=>{
+            console.log(error)
+        })
+    },[token])
     useEffect(() => {
     fetch(`http://127.0.0.1:8000/api/posts/pets/?search=${search}`)
         
@@ -49,13 +72,18 @@ export default function Home(){
                 />
                 <DeletePost 
                     id={pet.id} 
-                    onDeleted={() => {setPets((currentPets) => currentPets.filter((item) => item.id !== pet.id)
-                    );
+                    onDeleted={() => {setPets((currentPets) => currentPets.filter((item) => item.id !== pet.id));
                 }}
-                
                 />
+                {currentUser && currentUser.id === pet.posted_by?.id && (
+
+                <button type="button" onClick={()=>navigate(`/pets/${pet.id}/update/`)}>
+                    Edit post
+                </button>
+                )}
                 </div>
             ))}
+            
             <button type="button" onClick={()=>navigate("/upload")}>
                 Upload a new pet
             </button>

@@ -7,5 +7,6 @@ urlpatterns = [
     path('pets/<int:pk>/',PetDetailView.as_view()),
     path('pets/<int:pk>/claim/',ClaimPetView.as_view()),
     path('user/<int:user_id>/pets/',UserPetsView.as_view()),
+    path('pets/<int:pk>/update/', PetDetailView.as_view()),
 
 ]

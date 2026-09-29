@@ -12,6 +12,7 @@ import Upload from "./pages/Upload";
 import Signup from "./pages/Signup";
 import PetDetails from './pages/PetDetails';
 import PublicProfile from './pages/PublicProfile';
+import PostChange from './pages/PostChange'
 function App() {
 
     return (
@@ -24,6 +25,7 @@ function App() {
                 <Route path="/signup" element={<Signup />}/>
                 <Route path="/pets/:id" element={<PetDetails />}/>
                 <Route path="/user/:id" element={<PublicProfile />}/>
+                <Route path="/pets/:id/update/" element={<PostChange />}/>
 
 
 
