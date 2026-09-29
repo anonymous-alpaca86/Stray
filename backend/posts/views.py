@@ -50,8 +50,7 @@ class PetDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class=PetSerializer
     permission_classes=[IsOwnerOrReadOnly]
 
-    def get_object(self):
-        return get_object_or_404(Pet, pk=self.kwargs["pk"])       
+       
 class ClaimPetView(APIView):
     def post(self,request,pk):
         pet=get_object_or_404(Pet, pk=pk)

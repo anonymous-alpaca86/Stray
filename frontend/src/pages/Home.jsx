@@ -5,6 +5,7 @@ import SearchBar from "../components/SearchBar";
 import {useState, useEffect} from "react";
 import Logout from "../components/Logout";
 import {useNavigate} from "react-router-dom";
+import DeletePost from "../components/DeletePost";
 export default function Home(){
     const navigate=useNavigate();
     const [pets, setPets] = useState([]);
@@ -39,13 +40,21 @@ export default function Home(){
             />
 
             {pets.map((pet) => (
+                <div key={pet.id}>
                 <PetCard
-                    key={pet.id}
                     id={pet.id}
                     name={pet.name}
                     location={pet.location}
                     image={pet.image}
                 />
+                <DeletePost 
+                    id={pet.id} 
+                    onDeleted={() => {setPets((currentPets) => currentPets.filter((item) => item.id !== pet.id)
+                    );
+                }}
+                
+                />
+                </div>
             ))}
             <button type="button" onClick={()=>navigate("/upload")}>
                 Upload a new pet
