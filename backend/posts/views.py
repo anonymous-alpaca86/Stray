@@ -18,6 +18,8 @@ from PIL import Image
 from matching.ml.cat_model import load_model, get_embedding
 from .serializers import PetSerializer
 from rest_framework.permissions import AllowAny
+from django_filters.rest_framework import DjangoFilterBackend
+
 cat_model = load_model()  
 class IsOwnerOrReadOnly(BasePermission):
     def has_object_permission(self, request, view, obj):
@@ -32,11 +34,11 @@ class PetPagination(PageNumberPagination):
 class PetListView(generics.ListCreateAPIView):
     queryset=Pet.objects.all()
     serializer_class=PetSerializer
-    filterset_fields=['species','status','location']
+    filterset_fields=['species','status','location','area','name']
     pagination_class = PetPagination
     parser_classes = [MultiPartParser, FormParser]
-    filter_backends = [filters.SearchFilter, filters.OrderingFilter]
-    search_fields = ['name','message', 'location', 'color']
+    filter_backends = [DjangoFilterBackend,filters.SearchFilter, filters.OrderingFilter]
+    search_fields = ['name','location', 'color','area','species','status']
     ordering_fields = ['created_at', 'species']
     ordering = ['-created_at'] 
     def perform_create(self, serializer):
@@ -45,6 +47,7 @@ class PetListView(generics.ListCreateAPIView):
         embedding = get_embedding(cat_model, image)
         pet.embedding = embedding.tolist()
         pet.save()
+        
 class PetDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset=Pet.objects.all()
     serializer_class=PetSerializer

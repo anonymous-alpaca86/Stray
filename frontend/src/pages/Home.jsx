@@ -11,9 +11,12 @@ export default function Home(){
     const navigate=useNavigate();
     const [pets, setPets] = useState([]);
     const [search, setSearch] = useState("");
+    const [area, setArea]=useState("");
+    const [status,setStatus]=useState("");
     const[currentUser, setCurrenUser]=useState("");
     const token=localStorage.getItem("token");
 
+    //fetch profile info
     useEffect(()=>{
         fetch("http://127.0.0.1:8000/api/accounts/profile/",{
             headers:{
@@ -33,8 +36,15 @@ export default function Home(){
             console.log(error)
         })
     },[token])
+
+    //fetch pet
     useEffect(() => {
-    fetch(`http://127.0.0.1:8000/api/posts/pets/?search=${search}`)
+        const params= new URLSearchParams;
+        if (search) params.set("search", search)
+        if (area) params.set("area",area)
+        if (status) params.set("status",status)
+
+    fetch(`http://127.0.0.1:8000/api/posts/pets/?${params.toString()}`)
         
         .then((response)=>{
             if (!response.ok){
@@ -49,7 +59,7 @@ export default function Home(){
         .catch((error) => {
             console.error("Fetch error:", error);
         });
-}, [search]);
+}, [search,area,status]);
     return (
         <>
             <NavBar />
@@ -60,6 +70,10 @@ export default function Home(){
             <SearchBar 
                 search={search}
                 setSearch={setSearch}
+                area={area}
+                setArea={setArea}
+                status={status}
+                setStatus={setStatus}
             />
 
             {pets.map((pet) => (

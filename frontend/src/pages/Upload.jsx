@@ -12,6 +12,7 @@ export default function Upload(){
     const [color, setColor]= useState("other")
     const [sex, setSex] = useState("unknown")
     const [location, setLocation] = useState("")
+    const [area,setArea]=useState("")
     const handleSubmit=(event)=>{
         const formData=new FormData();
         formData.append("name",name)
@@ -22,7 +23,7 @@ export default function Upload(){
         formData.append("color",color)
         formData.append("location",location)
         formData.append("sex",sex)
-
+        formData.append("area",area)
         event.preventDefault();
         fetch("http://127.0.0.1:8000/api/posts/pets/",{
             method:"POST",
@@ -70,6 +71,38 @@ export default function Upload(){
                     <option value="reunited">reunited</option>
                     <option value="adopted">Adopted</option>
                     <option value="Claimed">Claimed</option>
+                    
+                </select>
+                <select
+                    value={area}
+                    onChange={(event)=>setArea(event.target.value)}
+                    required
+                >
+                    Select an area:
+                    <option value="">Select an area</option>
+                    <option value="district_1">District 1</option>
+                    <option value="district_2">District 2</option>
+                    <option value="district_3">District 3</option>
+                    <option value="district_4">District 4</option>
+                    <option value="district_5">District 5</option>
+                    <option value="district_6">District 6</option>
+                    <option value="district_7">District 7</option>
+                    <option value="district_8">District 8</option>
+                    <option value="district_10">District 10</option>
+                    <option value="district_11">District 11</option>
+                    <option value="district_12">District 12</option>
+                    <option value="thu_duc">Thu Duc City</option>
+                    <option value="binh_thanh">Binh Thanh</option>
+                    <option value="binh_tan">Binh Tan</option>
+                    <option value="go_vap">Go Vap</option>
+                    <option value="phu_nhuan">Phu Nhuan</option>
+                    <option value="tan_binh">Tan Binh</option>
+                    <option value="tan_phu">Tan Phu</option>
+                    <option value="binh_chanh">Binh Chanh</option>
+                    <option value="can_gio">Can Gio</option>
+                    <option value="cu_chi">Cu Chi</option>
+                    <option value="hoc_mon">Hoc Mon</option>
+                    <option value="nha_be">Nha Be</option>
                     
                 </select>
                 <label>
