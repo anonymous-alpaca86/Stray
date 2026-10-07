@@ -1,6 +1,7 @@
 from rest_framework import serializers
-from .models import Pet,User
+from .models import Pet, SavedPets
 from accounts.serializers import UserProfileSerializer
+
 
 
 class PetSerializer(serializers.ModelSerializer):
@@ -18,4 +19,10 @@ class PetSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("Lost pet need a message")
         return data
 
+class SavedPetSerizalier(serializers.ModelSerializer):
+    pet = PetSerializer(read_only=True)
+
+    class Meta:
+        model=SavedPets
+        fields=["id","pet"]
 

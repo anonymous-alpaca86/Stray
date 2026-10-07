@@ -4,7 +4,6 @@ from django.conf import settings
 # Create your models here.
 
 
-
     
 
 class Pet(models.Model):
@@ -73,4 +72,23 @@ class Pet(models.Model):
     ("nha_be", "Nha Be District"),
 ]
     area=models.CharField(max_length=100, choices=AREA_CHOICES, blank=True)
-    
+
+
+class SavedPets(models.Model):
+    user=models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="saved_pets",
+    )
+    pet=models.ForeignKey(
+        Pet,
+        on_delete=models.CASCADE,
+        related_name="saved_by",
+    )
+    class Meta:
+        constraints=[
+            models.UniqueConstraint(
+                fields=["user","pet"],
+                name="unique_saved_pet",
+            )
+        ]

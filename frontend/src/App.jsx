@@ -12,7 +12,8 @@ import Upload from "./pages/Upload";
 import Signup from "./pages/Signup";
 import PetDetails from './pages/PetDetails';
 import PublicProfile from './pages/PublicProfile';
-import PostChange from './pages/PostChange'
+import PostChange from './pages/PostChange';
+import SavedPet from './pages/SavedPet';
 function App() {
 
     return (
@@ -26,8 +27,8 @@ function App() {
                 <Route path="/pets/:id" element={<PetDetails />}/>
                 <Route path="/user/:id" element={<PublicProfile />}/>
                 <Route path="/pets/:id/update/" element={<PostChange />}/>
-
-
+                <Route path="pets/my-saved-pets/" element={<SavedPet />}/>
+                <Route path="pets/:id/save/" element={<SavedPet />}/>
 
             </Routes>
         </BrowserRouter>
