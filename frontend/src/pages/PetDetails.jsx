@@ -36,6 +36,8 @@ if(pet===null){
                     objectFit:"cover"
                 }}
             />
+            <p>Status: {pet.status}</p>
+            <p>Post type: {pet.post_type}</p>
             <p>Species: {pet.species}</p>
             <p>Message: {pet.message}</p>
             <p>Sex: {pet.sex}</p>

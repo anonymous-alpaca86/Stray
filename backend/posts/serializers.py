@@ -10,12 +10,15 @@ class PetSerializer(serializers.ModelSerializer):
         model=Pet
         fields='__all__'
         read_only_fields=['created_at']
+        extra_kwargs={
+            "post_type": {"required": True, "allow_blank":False}
+        }
     def validate_color(self,value):
         if len(value)<3:
             raise serializers.ValidationError("Color description too short")
         return value
     def validate(self,data):
-        if data['status']=='lost' and not data.get('message'):
+        if data['post_type']=='lost' and not data.get('message'):
             raise serializers.ValidationError("Lost pet need a message")
         return data
 

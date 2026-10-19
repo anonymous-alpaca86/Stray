@@ -152,6 +152,8 @@ export default function Home(){
                             name={pet.name}
                             location={pet.location}
                             image={pet.image}
+                            status={pet.status}
+                            post_type={pet.post_type}
                         />
                         <DeletePost 
                             id={pet.id} 

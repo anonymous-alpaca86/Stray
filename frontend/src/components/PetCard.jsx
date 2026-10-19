@@ -1,7 +1,7 @@
 import {Link} from "react-router-dom";
 
 
-function PetCard({id,name,location,image}){
+function PetCard({id,name,location,image,status, post_type}){
     return (
         <div>
             <h2>
@@ -19,6 +19,8 @@ function PetCard({id,name,location,image}){
                 }}
             />
             )}
+            <p>Status: {status}</p>
+            <p>Post type: {post_type}</p>
         </div>
     );
 }

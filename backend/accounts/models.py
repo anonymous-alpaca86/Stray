@@ -5,3 +5,4 @@ from django.conf import settings
 class User(AbstractUser):
     phone_number=models.CharField(max_length=20, blank=True)
     social_media_account=models.CharField(max_length=200, blank=True)
+    location=models.CharField(max_length=50, blank=True)

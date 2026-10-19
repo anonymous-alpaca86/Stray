@@ -8,6 +8,7 @@ export default function PostChange(){
     const [name, setName] = useState("")
     const [species, setSpecies] = useState("cat")
     const [status, setStatus] = useState("lost")
+    const [post_type, setPostType] = useState("active")
     const [color, setColor]= useState("other")
     const [sex, setSex] = useState("unknown")
     const [location, setLocation] = useState("")
@@ -30,15 +31,16 @@ export default function PostChange(){
             console.log(error)
         })
         .then((data)=>{
-            setExistingImage(data.image ?? "")
-            setMessage(data.message ?? "")
-            setName(data.name ?? "")
-            setSpecies(data.species ?? "cat")
-            setStatus(data.status ?? "lost")
-            setColor(data.color ?? "other")
-            setSex(data.sex ?? "unknown")
-            setLocation(data.location ?? "")
-            setArea(data.location ??"")
+            setExistingImage(data.image)
+            setMessage(data.message)
+            setName(data.name)
+            setSpecies(data.species)
+            setStatus(data.status)
+            setColor(data.color)
+            setSex(data.sex)
+            setLocation(data.location)
+            setArea(data.area)
+            setPostType(data.post_type)
         })
         .catch((error)=>{
             alert(error.message)
@@ -58,6 +60,7 @@ export default function PostChange(){
             formData.append("location",location)
             formData.append("sex",sex)
             formData.append("area",area)
+            formData.append("post_type", post_type)
             if (image){
                 formData.append("image",image)
             }
@@ -108,26 +111,32 @@ export default function PostChange(){
                         type="text"
                         value={name}
                         onChange={(event)=>setName(event.target.value)}
-                        required
+                        
                     />
                 </label>
                 <select
                     value={status}
                     onChange={(event)=>setStatus(event.target.value)}
-                    required
-                >
-                    <option value="lost">Lost</option>
-                    <option value="stray">Stray</option>
-                    <option value="fostered">Fostered</option>
-                    <option value="reunited">reunited</option>
-                    <option value="adopted">Adopted</option>
-                    <option value="Claimed">Claimed</option>
                     
+                >   
+                    Status: 
+                    <option value="active">Active</option>
+                    <option value="reunited">Reunited</option>
+                    
+                </select>
+                <select
+                    value={post_type}
+                    onChange={(event)=>setPostType(event.target.value)}
+                    
+                >
+                    Post type: 
+                    <option value="lost">Lost</option>
+                    <option value="found">Found</option>
                 </select>
                 <select
                     value={area}
                     onChange={(event)=>setArea(event.target.value)}
-                    required
+                    
                 >
                     Select an area:
                     <option value="">Select an area</option>
@@ -194,7 +203,7 @@ export default function PostChange(){
                         type="text"
                         value={location}
                         onChange={(event)=>setLocation(event.target.value)}
-                        required
+                        
                     />
 
                 </label>
@@ -204,7 +213,7 @@ export default function PostChange(){
                         type="text"
                         value={message}
                         onChange={(event) =>setMessage(event.target.value)}
-                        required
+                        
                     />
                 </label>
                 <button type="submit">Save changes</button>

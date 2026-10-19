@@ -5,6 +5,7 @@ export default function Signup(){
     const [password, setPassword] = useState("");
     const [first_name, setFirst_name] = useState("");
     const [last_name, setLast_name] = useState("");
+    const [phone_number, setPhone_number]= useState("");
 
     //Problem: can sign up new user but cant log in using that account
     const handleSignup=(event)=>{
@@ -14,7 +15,7 @@ export default function Signup(){
             headers:{
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({username, email, password, first_name, last_name})
+            body: JSON.stringify({username, email, password, first_name, last_name, phone_number})
             })
         .then(async (response) => {
         const data = await response.json();
@@ -67,6 +68,12 @@ export default function Signup(){
             placeholder="Last name"
             value={last_name}
             onChange={(event)=>setLast_name(event.target.value)}
+        />
+        <input
+            type="text"
+            placeholder="Phone number"
+            value={phone_number}
+            onChange={(event)=>setPhone_number(event.target.value)}
         />
         <button type="submit">Submit</button>
 

@@ -19,14 +19,15 @@ class Pet(models.Model):
     posted_by=models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
     created_at=models.DateTimeField(auto_now_add=True)
     STATUS_CHOICES =[
+            ('active','Active'),
+            ('reunited','Reunited'),
+        ]
+    status=models.CharField(max_length=100, choices= STATUS_CHOICES, default='active')
+    POST_TYPE_CHOICES =[
         ('lost','Lost'),
-        ('stray','Stray'),
-        ('fostered','Fostered'),
-        ('reunited','Reunited'),
-        ('adopted','Adopted'),
-        ('claimed', 'Claimed'),
+        ('found','Found')
     ]
-    status=models.CharField(max_length=100, choices= STATUS_CHOICES)
+    post_type=models.CharField(max_length=100, choices=POST_TYPE_CHOICES, default='lost')
     COLOR_CHOICES = [
         ('black','Black'),
         ('white','White'),

@@ -13,6 +13,7 @@ export default function Upload(){
     const [sex, setSex] = useState("unknown")
     const [location, setLocation] = useState("")
     const [area,setArea]=useState("")
+    const [post_type, setPostType] = useState("active")
     const handleSubmit=(event)=>{
         const formData=new FormData();
         formData.append("name",name)
@@ -24,6 +25,7 @@ export default function Upload(){
         formData.append("location",location)
         formData.append("sex",sex)
         formData.append("area",area)
+        formData.append("post_type", post_type)
         event.preventDefault();
         fetch("http://127.0.0.1:8000/api/posts/pets/",{
             method:"POST",
@@ -65,13 +67,18 @@ export default function Upload(){
                     onChange={(event)=>setStatus(event.target.value)}
                     required
                 >
-                    <option value="lost">Lost</option>
-                    <option value="stray">Stray</option>
-                    <option value="fostered">Fostered</option>
-                    <option value="reunited">reunited</option>
-                    <option value="adopted">Adopted</option>
-                    <option value="Claimed">Claimed</option>
+                    <option value="active">Active</option>
+                    <option value="reunited">Reunited</option>
                     
+                    
+                </select>
+                <select
+                    value={post_type}
+                    onChange={(event)=>setPostType(event.target.value)}
+                    required
+                >
+                    <option value="lost">Lost</option>
+                    <option value="found">Found</option>
                 </select>
                 <select
                     value={area}

@@ -33,6 +33,8 @@ export default function SavedPet(){
                     name={saved.pet.name}
                     location={saved.pet.location}
                     image={saved.pet.image}
+                    status={saved.pet.status}
+                    post_type={saved.pet.post_type}
                 />
             
 
